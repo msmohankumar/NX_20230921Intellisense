@@ -1,0 +1,53 @@
+from ....NXOpen import *
+from ...CAE import *
+from ..ContactPreview import *
+
+import typing
+import enum
+
+class SettingsBuilder(Builder):
+    def __init__(self) -> None: ...
+    ContactSide: CAE.ContactPreview.SettingsBuilder.ContactSideOptions
+
+
+    class ContactSideOptions(enum.Enum):
+        Both = 0
+        Contact = 1
+        Target = 2
+    
+
+class NamespaceDoc(System.Object):
+    def __init__(self) -> None: ...
+
+
+class ContactObjectCollection(TaggedObjectCollection):
+    def EnumerateMoveNext(self, currentTag: Tag, state: bytes) -> int:
+        ...
+    def ToArray(self) -> typing.List[CAE.ContactPreview.ContactObject]:
+        ...
+    def __init__(self, owner: CAE.CaeSession) -> None: ...
+    def __init__(self) -> None: ...
+    def FindObject(self, journalIdentifier: str) -> INXObject:
+        ...
+    def ClearCollection(self) -> None:
+        ...
+    def RefreshResults(self, pObjects: typing.List[CAE.ContactPreview.ContactObject]) -> None:
+        ...
+    def PlotContours(self, viewIndex: int, pObjects: typing.List[CAE.ContactPreview.ContactObject]) -> None:
+        ...
+    def PlotContactLines(self, pObjects: typing.List[CAE.ContactPreview.ContactObject]) -> None:
+        ...
+    def Print(self) -> None:
+        ...
+    def Populate(self) -> None:
+        ...
+    def Tag(self) -> Tag: ...
+
+
+
+class ContactObject(NXObject):
+    def __init__(self) -> None: ...
+    def DeleteResultObject(self) -> None:
+        ...
+
+

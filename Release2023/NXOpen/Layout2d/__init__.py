@@ -1,0 +1,562 @@
+from ...NXOpen import *
+from ..Layout2d import *
+
+import typing
+import enum
+
+class SmashComponentBuilder(Builder):
+    def __init__(self) -> None: ...
+    Components: Layout2d.SelectComponentList
+
+
+class SelectComponentList(TaggedObject):
+    def __init__(self) -> None: ...
+    def Add(self, object: Layout2d.Component) -> bool:
+        ...
+    def Add(self, objects: typing.List[Layout2d.Component]) -> bool:
+        ...
+    def Add(self, inputSelectionMethod: SelectionMethod) -> bool:
+        ...
+    def Add(self, selection: Layout2d.Component, view: View, point: Point3d) -> bool:
+        ...
+    def Remove(self, object: Layout2d.Component) -> bool:
+        ...
+    def Remove(self, object: Layout2d.Component, view: View) -> bool:
+        ...
+    def Remove(self, snapType: InferSnapType.SnapType, selection1: Layout2d.Component, view1: View, point1: Point3d, selection2: Layout2d.Component, view2: View, point2: Point3d) -> bool:
+        ...
+    def RemoveArray(self, objects: typing.List[Layout2d.Component]) -> bool:
+        ...
+    def Remove(self, inputSelectionMethod: SelectionMethod) -> bool:
+        ...
+    def Clear(self) -> None:
+        ...
+    def Contains(self, object: Layout2d.Component) -> bool:
+        ...
+    def SetArray(self, objects: typing.List[Layout2d.Component]) -> None:
+        ...
+    def GetArray(self) -> typing.List[Layout2d.Component]:
+        ...
+    def GetSelectObjectArray(self) -> typing.List[SelectObject]:
+        ...
+    def Add(self, snapType: InferSnapType.SnapType, selection1: Layout2d.Component, view1: View, point1: Point3d, selection2: Layout2d.Component, view2: View, point2: Point3d) -> bool:
+        ...
+    def Add(self, selection: Layout2d.Component, caeSubType: CaeObjectType.CaeSubType, caeSubId: int) -> bool:
+        """[Obsolete("Deprecated in NX10.0.0.  Use other versions of NXOpen.SelectObjectList.Add.")"""
+        ...
+    def Validate(self) -> bool:
+        ...
+    DuplicatesAllowed: bool
+    Size: int
+
+
+class SelectComponent(TaggedObject):
+    def __init__(self) -> None: ...
+    def SetValue(self, selection: Layout2d.Component, view: View, point: Point3d) -> None:
+        ...
+    def GetValue(self, selection: Layout2d.Component, view: View, point: Point3d) -> None:
+        ...
+    def SetValue(self, snapType: InferSnapType.SnapType, selection1: Layout2d.Component, view1: View, point1: Point3d, selection2: Layout2d.Component, view2: View, point2: Point3d) -> None:
+        ...
+    def GetValue(self, snapType: InferSnapType.SnapType, selection1: Layout2d.Component, view1: View, point1: Point3d, selection2: Layout2d.Component, view2: View, point2: Point3d) -> None:
+        ...
+    def SetValue(self, selection: Layout2d.Component, caeSubType: CaeObjectType.CaeSubType, caeSubId: int) -> None:
+        """[Obsolete("Deprecated in NX10.0.0.  Use other versions of NXOpen.SelectObject.SetValue.")"""
+        ...
+    def GetValue(self, caeSubType: CaeObjectType.CaeSubType, caeSubId: int) -> Layout2d.Component:
+        """[Obsolete("Deprecated in NX10.0.0.  Use other versions of NXOpen.SelectObject.GetValue.")"""
+        ...
+    def Validate(self) -> bool:
+        ...
+    Value: Layout2d.Component
+
+
+class ReplaceComponentBuilder(Builder):
+    def __init__(self) -> None: ...
+    Components: Layout2d.SelectComponentList
+    Location: Layout2d.Layout2dDefinitionLocation
+    Path: str
+    ReplaceAll: bool
+
+
+class ReparentComponentBuilder(Builder):
+    def __init__(self) -> None: ...
+    def AddComponents(self, components: typing.List[Layout2d.Component]) -> None:
+        ...
+    Components: Layout2d.SelectComponentList
+    CreateCopy: bool
+    Target: DisplayableObject
+
+
+class PublishComponentBuilder(Builder):
+    def __init__(self) -> None: ...
+    DestinationPath: str
+    IsFolder: bool
+    Location: Layout2d.Layout2dDefinitionLocation
+    OriginPath: str
+
+
+class NewComponentBuilder(Builder):
+    def __init__(self) -> None: ...
+    Owner: NXObject
+
+
+class NamespaceDoc(System.Object):
+    def __init__(self) -> None: ...
+
+
+class MakeComponentUniqueBuilder(Builder):
+    def __init__(self) -> None: ...
+    def SetPath(self, path: str) -> None:
+        ...
+    def SetLocation(self, locationType: Layout2d.Layout2dDefinitionLocation) -> None:
+        ...
+    Component: Layout2d.SelectComponent
+    ComponentName: Layout2d.ComponentNameBuilder
+    ImageCapture: Gateway.ImageCaptureBuilder
+    ImageName: str
+
+
+class LocalDefinitionFolderCollection(TaggedObjectCollection):
+    def EnumerateMoveNext(self, currentTag: Tag, state: bytes) -> int:
+        ...
+    def ToArray(self) -> typing.List[Layout2d.LocalDefinitionFolder]:
+        ...
+    def __init__(self, owner: Part) -> None: ...
+    def __init__(self) -> None: ...
+    def CreateLocalDefinitionFolderBuilder(self, currentFolder: Layout2d.LocalDefinitionFolder) -> Layout2d.LocalDefinitionFolderBuilder:
+        ...
+    def FindObject(self, name: str) -> Layout2d.LocalDefinitionFolder:
+        ...
+    def Tag(self) -> Tag: ...
+
+
+
+class LocalDefinitionFolderBuilder(Builder):
+    def __init__(self) -> None: ...
+    FolderName: str
+    Parent: Layout2d.LocalDefinitionFolder
+
+
+class LocalDefinitionFolder(NXObject):
+    def __init__(self) -> None: ...
+
+
+class LayoutDrawingSheetCollection(TaggedObjectCollection):
+    def EnumerateMoveNext(self, currentTag: Tag, state: bytes) -> int:
+        ...
+    def ToArray(self) -> typing.List[Layout2d.LayoutDrawingSheet]:
+        ...
+    def __init__(self, owner: Part) -> None: ...
+    def __init__(self) -> None: ...
+    def FindObject(self, journalIdentifier: str) -> Layout2d.LayoutDrawingSheet:
+        ...
+    def CreateLayoutDrawingSheetBuilder(self, layoutDrawingSheet: Layout2d.LayoutDrawingSheet) -> Layout2d.LayoutDrawingSheetBuilder:
+        ...
+    def InsertSheet(self, name: str, units: Drawings.DrawingSheet.Unit, numerator: float, denominator: float, projectionAngle: Drawings.DrawingSheet.ProjectionAngleType) -> Layout2d.LayoutDrawingSheet:
+        ...
+    def CreateConvertSheetToLayoutBuilder(self) -> Layout2d.ConvertSheetToLayoutBuilder:
+        ...
+    def CreateConvertLayoutToSheetBuilder(self) -> Layout2d.ConvertLayoutToSheetBuilder:
+        ...
+    def Tag(self) -> Tag: ...
+
+    CurrentDrawingSheet: Layout2d.LayoutDrawingSheet
+
+
+class LayoutDrawingSheetBuilder(Drawings.DrawingSheetBuilder):
+    def __init__(self) -> None: ...
+
+
+class LayoutDrawingSheet(Drawings.DrawingSheet):
+    def __init__(self) -> None: ...
+
+
+class Layout2dDefinitionStatus(enum.Enum):
+    Unknown = 0
+    Synced = 1
+    NotSynced = 2
+    Missing = 3
+
+
+class Layout2dDefinitionLocation(enum.Enum):
+    Unspecified = 0
+    Local = 1
+    Native = 2
+    TcEng = 3
+
+
+class Layout2dComponentMemberType(enum.Enum):
+    None = 0
+    SketchGeometryNonReference = 1
+    SketchGeometryReference = 2
+    SketchGeometry = 3
+    SketchDimension = 4
+    SketchConstraint = 8
+    Sketch = 16
+    Component = 32
+    DraftingDimension = 64
+    Dimension = 68
+    DraftingAnnotationNonDimension = 128
+    DraftingAnnotation = 192
+    Annotation = 196
+    MiscOthers = 256
+    Misc = 448
+    ExemptRelationsSet = 512
+    All = 1023
+
+
+class InsertComponentBuilder(Builder):
+    def __init__(self) -> None: ...
+    def SetPath(self, path: str) -> None:
+        ...
+    def SetLocation(self, locationType: Layout2d.Layout2dDefinitionLocation) -> None:
+        ...
+    Angle: float
+    Settings: Layout2d.ComponentSettingsBlockBuilder
+    Sketch: Sketch
+    SpecifyPoint: Point3d
+
+
+class InheritDisplayAttributesBuilder(Builder):
+    def __init__(self) -> None: ...
+    Components: Layout2d.SelectComponentList
+    Direction: Layout2d.InheritDisplayAttributesBuilder.InheritDirection
+
+
+    class InheritDirection(enum.Enum):
+        DefinitionToComponent = 0
+        ComponentToDefinition = 1
+    
+
+class GeneralPreferencesBuilder(TaggedObject):
+    def __init__(self) -> None: ...
+    def Validate(self) -> bool:
+        ...
+    ShowLayoutOrigin: bool
+
+
+class ExportComponentHierarchyBuilder(Builder):
+    def __init__(self) -> None: ...
+    ChildComponentsForComponents: bool
+    ChildComponentsForDefinitions: bool
+    Contents: bool
+    DefinitionReferenceProperties: bool
+    Definitions: bool
+    OutputFileName: str
+    Selection: SelectDisplayableObjectList
+    SoftwareProperties: bool
+
+
+class EditComponentSettingsBuilder(Drafting.BaseEditSettingsBuilder):
+    def __init__(self) -> None: ...
+    def InheritSettingsFromSelectedObject(self, selectedObject: NXObject) -> None:
+        ...
+    def InheritSettingsFromCustomerDefault(self) -> None:
+        ...
+    def InheritSettingsFromPreferences(self) -> None:
+        ...
+    ComponentSettings: Layout2d.ComponentSettingsBlockBuilder
+
+
+class DefineComponentBuilder(Builder):
+    def __init__(self) -> None: ...
+    def IsValidActiveSetMember(self, object: DisplayableObject) -> bool:
+        ...
+    def SetPath(self, path: str) -> None:
+        ...
+    def SetLocation(self, locationType: Layout2d.Layout2dDefinitionLocation) -> None:
+        ...
+    ActiveSet: ScCollector
+    ActiveSetScope: Layout2d.ActiveSetScope
+    AnchorPoint: Point
+    ComponentName: Layout2d.ComponentNameBuilder
+    Contents: SelectNXObjectList
+    ImageCapture: Gateway.ImageCaptureBuilder
+    ImageName: str
+
+
+class DefineComponentAnchorPointBuilder(Builder):
+    def __init__(self) -> None: ...
+    AnchorPoint: Point
+
+
+class CreateComponentFrom3DSettingsBuilder(TaggedObject):
+    def __init__(self) -> None: ...
+    def InheritSettingsFromCustomerDefault(self) -> None:
+        ...
+    def InheritSettingsFromPreferences(self) -> None:
+        ...
+    def Validate(self) -> bool:
+        ...
+    ActiveSetScope: Layout2d.ActiveSetScope
+    AutomaticallyStartInsert2DComponentCommand: bool
+    Color: int
+    ColorOption: Display.DynamicSectionTypes.CurveColorOption
+    CreateSingle2DComponentDefinition: bool
+
+
+class CreateComponentFrom3DBuilder(Display.DynamicSectionBuilder):
+    def __init__(self) -> None: ...
+    def SetSourcePart(self, part: Part) -> None:
+        ...
+    def GetSourcePart(self) -> Part:
+        ...
+    def SetProjectionPlane(self, origin: Point3d, yAxis: Vector3d, zAxis: Vector3d) -> None:
+        ...
+    def GetProjectionPlane(self, origin: Point3d, orientation: Matrix3x3) -> None:
+        ...
+    ComponentName: str
+    Method: Layout2d.CreateComponentFrom3DBuilder.CreateMethod
+    SelectedObjects: SelectTaggedObjectList
+    Settings: Layout2d.CreateComponentFrom3DSettingsBuilder
+
+
+    class CreateMethod(enum.Enum):
+        Section = 0
+        Plane = 1
+    
+
+class ConvertSheetToLayoutBuilder(Layout2d.LayoutDrawingSheetBuilder):
+    def __init__(self) -> None: ...
+    SelectSheetView: SelectView
+
+
+class ConvertLayoutToSheetBuilder(Builder):
+    def __init__(self) -> None: ...
+    def GetScale(self, numerator: float, denominator: float) -> None:
+        ...
+    def SetScale(self, numerator: float, denominator: float) -> None:
+        ...
+    Name: str
+    Number: str
+    ProjectionAngleType: Layout2d.ConvertLayoutToSheetBuilder.SheetProjectionAngleType
+    Revision: str
+    SecondaryNumber: str
+    SelectLayoutSheetView: SelectView
+
+
+    class SheetProjectionAngleType(enum.Enum):
+        First = 0
+        Third = 1
+    
+
+class ComponentSettingsBuilder(TaggedObject):
+    def __init__(self) -> None: ...
+    def Validate(self) -> bool:
+        ...
+    AutomaticUpdate: bool
+    KeepEditedPartsOpen: bool
+    ShowAnnotations: bool
+    ShowDimensions: bool
+    ShowReferenceGeometry: bool
+
+
+class ComponentSettingsBlockBuilder(TaggedObject):
+    def __init__(self) -> None: ...
+    def InheritSettingsFromSelectedObject(self, selectedObject: NXObject) -> None:
+        ...
+    def InheritSettingsFromCustomerDefault(self) -> None:
+        ...
+    def InheritSettingsFromPreferences(self) -> None:
+        ...
+    def Validate(self) -> bool:
+        ...
+    ComponentSettings: Layout2d.ComponentSettingsBuilder
+
+
+class ComponentNameBuilder(TaggedObject):
+    def __init__(self) -> None: ...
+    def SetPartOperationBuilder(self, partOperationBuilder: PDM.PartOperationCreateBuilder) -> None:
+        ...
+    def Validate(self) -> bool:
+        ...
+    Location: Layout2d.Layout2dDefinitionLocation
+    Name: str
+    PartName: str
+
+
+class ComponentDefinitionCollection(TaggedObjectCollection):
+    def EnumerateMoveNext(self, currentTag: Tag, state: bytes) -> int:
+        ...
+    def ToArray(self) -> typing.List[Layout2d.LocalDefinitionFolder]:
+        ...
+    def __init__(self, owner: Part) -> None: ...
+    def __init__(self) -> None: ...
+    def FindObject(self, sid: str) -> Layout2d.ComponentDefinition:
+        ...
+    def Rename(self, location: Layout2d.Layout2dDefinitionLocation, definitionPath: str, newName: str) -> None:
+        ...
+    def Delete(self, location: Layout2d.Layout2dDefinitionLocation, definitionPath: str) -> None:
+        ...
+    def UpdateImage(self, location: Layout2d.Layout2dDefinitionLocation, definitionPath: str, imagePath: str) -> None:
+        ...
+    def SetAutomaticPreview(self, location: Layout2d.Layout2dDefinitionLocation, definitionPath: str, isAutomatic: bool) -> None:
+        ...
+    def Update(self, location: Layout2d.Layout2dDefinitionLocation, definitionPath: str) -> None:
+        ...
+    def RefreshAllReferences(self) -> None:
+        ...
+    def Tag(self) -> Tag: ...
+
+
+
+class ComponentDefinition(NXObject):
+    def __init__(self) -> None: ...
+    def Rename(self, definitionPath: str, newName: str) -> None:
+        ...
+    def Delete(self, definitionPath: str) -> None:
+        ...
+    def UpdateImage(self, definitionPath: str, imagePath: str) -> None:
+        ...
+    def GetMembers(self, memberType: Layout2d.Layout2dComponentMemberType, members: typing.List[DisplayableObject]) -> None:
+        ...
+
+
+class ComponentCollection(TaggedObjectCollection):
+    def EnumerateMoveNext(self, currentTag: Tag, state: bytes) -> int:
+        ...
+    def ToArray(self) -> typing.List[Layout2d.Component]:
+        ...
+    def __init__(self, owner: Part) -> None: ...
+    def __init__(self) -> None: ...
+    def FindObject(self, journalIdentifier: str) -> Layout2d.Component:
+        ...
+    def CreateDefineComponentBuilder(self, component: Layout2d.Component) -> Layout2d.DefineComponentBuilder:
+        ...
+    def CreateInsertComponentBuilder(self) -> Layout2d.InsertComponentBuilder:
+        ...
+    def CreateReplaceComponentBuilder(self) -> Layout2d.ReplaceComponentBuilder:
+        ...
+    def CreateSmashComponentBuilder(self) -> Layout2d.SmashComponentBuilder:
+        ...
+    def CreateMakeComponentUniqueBuilder(self) -> Layout2d.MakeComponentUniqueBuilder:
+        ...
+    def CreateDefineComponentAnchorPointBuilder(self) -> Layout2d.DefineComponentAnchorPointBuilder:
+        ...
+    def CreatePublishComponentBuilder(self) -> Layout2d.PublishComponentBuilder:
+        ...
+    def CreateNewComponentBuilder(self) -> Layout2d.NewComponentBuilder:
+        ...
+    def DeleteComponents(self, components: typing.List[Layout2d.Component]) -> None:
+        ...
+    def IsComponentMember(self, disObject: DisplayableObject) -> bool:
+        ...
+    def CreateAssemblyFromLayout2dBuilder(self) -> Layout2d.AssemblyFromLayout2dBuilder:
+        ...
+    def CreateReparentComponentBuilder(self) -> Layout2d.ReparentComponentBuilder:
+        ...
+    def UpdateComponents(self, components: typing.List[Layout2d.Component]) -> None:
+        ...
+    def UpdateComponentHierarchy(self, components: typing.List[Layout2d.Component]) -> None:
+        ...
+    def CreateComponentFrom3dBuilder(self, myView: View) -> Layout2d.CreateComponentFrom3DBuilder:
+        ...
+    def CreateExportComponentHierarchyBuilder(self) -> Layout2d.ExportComponentHierarchyBuilder:
+        ...
+    def CreateAssociativeAssemblyBuilder(self) -> Layout2d.AssociativeAssemblyBuilder:
+        ...
+    def CreateInheritDisplayAttributesBuilder(self) -> Layout2d.InheritDisplayAttributesBuilder:
+        ...
+    def CreateComponentActiveSetBuilder(self) -> Layout2d.ComponentActiveSetBuilder:
+        ...
+    def Tag(self) -> Tag: ...
+
+    OrderManagers: Drawings.OrderManager
+
+
+class ComponentActiveSetBuilder(Builder):
+    def __init__(self) -> None: ...
+    def IsValidActiveSetMember(self, objectTag: DisplayableObject) -> bool:
+        ...
+    ActiveSet: ScCollector
+    ActiveSetScope: Layout2d.ActiveSetScope
+
+
+class Component(DisplayableObject):
+    def __init__(self) -> None: ...
+    def Activate(self) -> None:
+        ...
+    def Deactivate(self) -> None:
+        ...
+    def Update(self) -> None:
+        ...
+    def ExitActivate(self) -> None:
+        ...
+    def GetMembers(self, memberType: Layout2d.Layout2dComponentMemberType, members: typing.List[DisplayableObject]) -> None:
+        ...
+    def Transform(self, rotation: Matrix3x3, translation: Vector3d) -> None:
+        ...
+    def SetTransform(self, rotation: Matrix3x3, translation: Vector3d) -> None:
+        ...
+    def GetTransform(self, rotation: Matrix3x3, translation: Vector3d) -> None:
+        ...
+    def AddExistingCurves(self, curves: typing.List[DisplayableObject]) -> None:
+        ...
+    def GetDefinition(self) -> Layout2d.ComponentDefinition:
+        ...
+    def GetAnchorPoint(self, anchorPoint: Point3d) -> bool:
+        ...
+    def GetDefinitionName(self) -> str:
+        ...
+    def GetDefinitionPath(self) -> str:
+        ...
+    def GetDefinitionLocation(self) -> Layout2d.Layout2dDefinitionLocation:
+        ...
+    def ActivateInIsolation(self) -> Sketch:
+        ...
+    IsActive: bool
+    LockUpdateStatus: bool
+    UpgradeUponActivation: bool
+
+
+class AssociativeAssemblyBuilder(Builder):
+    def __init__(self) -> None: ...
+    def GetAssemblyRelations(self) -> typing.List[Layout2d.AssemblyRelation]:
+        ...
+    def ResetAssemblyRelations(self) -> None:
+        ...
+    Direction: Layout2d.AssociativeAssemblyBuilder.UpdateDirection
+
+
+    class UpdateDirection(enum.Enum):
+        LayoutToAssembly = 0
+        AssemblyToLayout = 1
+    
+
+class AssemblyRelation(NXObject):
+    def __init__(self) -> None: ...
+    def GetPrototypeInferred(self) -> bool:
+        ...
+    Associative: bool
+    PrototypeFileSpec: str
+    SyncContent: bool
+    SyncStructure: bool
+
+
+class AssemblyFromLayout2dBuilder(Builder):
+    def __init__(self) -> None: ...
+    AssemblyPart: Part
+    Layout2dObject: SelectDisplayableObject
+    Settings: Layout2d.AssemblyCreationSettingsBuilder
+
+
+class AssemblyCreationSettingsBuilder(TaggedObject):
+    def __init__(self) -> None: ...
+    def InheritSettingsFromCustomerDefault(self) -> None:
+        ...
+    def InheritSettingsFromPreferences(self) -> None:
+        ...
+    def Validate(self) -> bool:
+        ...
+    AutomaticallyStartModelingApplication: bool
+    Transfer2dComponentAnnotation: bool
+    TransferTopLevelSketchAnnotation: bool
+
+
+class ActiveSetScope(enum.Enum):
+    NoMembers = 0
+    SelectMembers = 1
+    AllMembers = 2
+
+
